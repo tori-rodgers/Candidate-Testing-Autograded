@@ -16,7 +16,6 @@ let questions = ["Who was the first American woman in space? ", "True or false: 
 let correctAnswers = ["Sally Ride", "true", "40", "Trajectory", "3"]
 let candidateAnswers = [];
 
-
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
 candidateName = input.question("Greetings candidate! Please enter your name: ");
@@ -50,10 +49,26 @@ function gradeQuiz(candidateAnswers) {
 // } else {
 //   console.log("That is incorrect.");
 // }
+  let correctCount = 0;
+  
+  for (let i = 0; i < candidateAnswers.length; i++) {
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+      correctCount++;
+    }
+  }
 
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  let totalQuestions = correctAnswers.length;
+  let grade = (correctCount / totalQuestions) * 100;  //TODO 3.2 use this variable to calculate the candidates score.
 
+
+  console.log(`>>> Overall Grade: ${grade}% (${correctCount} out of 5 responses correct) <<<`);
+
+  if (grade >= 80) {
+    console.log(">>> Status: PASSED <<<");
+  } else {
+    console.log(">>> Status: FAILED <<<");
+  }
 
   return grade;
 }
@@ -62,7 +77,7 @@ function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
   
-   console.log(`Hello, ${candidateName}!`);
+   console.log(`Hello, ${candidateName}! We have a short quiz for you.`);
    
 
   askQuestion();
